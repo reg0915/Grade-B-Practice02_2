@@ -161,6 +161,7 @@ header("location:" . $url);
 
 
 $Total=new DB ('total');
+$User=new DB ('users');
 
 if(!isset($_SESSION['total'])){
 $today=date("Y-m-d");

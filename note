@@ -71,8 +71,66 @@ $(".type").on("click",function(){
 
 
 
-front/login
-1.建立會員登入頁面
+front/
+1.建立login會員登入頁面
+2.完成forgot及reg頁面
+3.
+在註冊上加上onclick='reg()'
+在清除上加上onclick='resetFrom()'
+在reg.php建立js function reg()及resetFrom()
+function reg() {
+    let user = {
+        acc: $("#acc").val(),
+        pw: $("#pw").val(),
+        pw2: $("#pw2").val(),
+        email: $("#email").val()
+
+    }
+    if (user.acc == "" || user.pw == "" || user.pw2 == "" || user.email == "") {
+        alert("不可空白");
+    } else if (user.pw != user.pw2) {
+        alert("密碼錯誤");
+    } else {
+        $.get("./api/chk_acc.php", {
+            acc: user.acc
+        }, (res) => {
+            if (parseInt(res) > 0) {
+                alert("帳號重複");
+            } else {
+                $.post("./api/reg.php", user, (res) => {
+                    if (parseInt(res) == 1) {
+                        alert("註冊完成，歡迎加入");
+                    }
+                })
+
+            }
+        })
+    }
+}
+
+function resetForm() {
+    $("#acc").val("")
+    $("#pw").val("")
+    $("#pw2").val("")
+    $("#email").val("")
+
+}
+
+4.去api做後端
+新增chk_acc.php
+<?php include_once "db.php";
+
+echo $User->count($_GET);
+
+再新增reg.php
+<?php include_once "db.php";
+
+unset($_POST['pw2']);
+echo $User->save($_POST);
+
+?>
+
+完成會員登入及ajax
 
 
 
