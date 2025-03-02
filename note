@@ -1,0 +1,81 @@
+
+
+Index
+
+1.先做版面配置
+2.在front建立main po pop news que四個檔案
+3.在index.php會員登入下第二個div，做$do引入程式，<?php  ?>
+4.然後刪除ifream
+5.在title2引入標題圖片,及做a連結回首頁
+去css 改.mm 525 .left 525 .main 515
+6.做顯示當天年月日今日和瀏覽人數及總人數
+7.在會員登入下座跑馬燈marquee , 然後移到會員登入前 ,寬度改75% 會員23%
+8.複製一個index作為admin,然後修改$do路徑,建立back/main.php檔案
+
+
+Admin
+
+1.修改admin 五個選項名稱加上管理
+2.建立資料庫total ->id date total
+3.在api建立瀏覽人數及總人數的if(!isset($_SESSION['total']))
+
+
+Index
+1.建立瀏覽人數及總人數 
+ 今日瀏覽:<?php echo $Total->find(['date' => date("Y-m-d")])['total']; ?> 
+| 累積瀏覽: <?php echo qCol(" SELECT sum(total) from total "); ?> 
+
+並加入<a href="index.php" style="float:right">回首頁</a>
+
+
+front->main.php
+1.建立
+分類網誌
+最新文章
+人氣文章
+講座訊息
+問卷調查
+
+五個div及css border pandding
+最外層div display flex
+
+2.
+加4個div.text 
+
+css
+.text{
+    
+width:90% ;
+min-height: 450px;
+border:1px solid #999;
+display: none;
+
+}
+
+
+3.再加上
+.active{
+    display: block;
+}
+
+
+為了要有點擊效果
+還要加上
+$(".type").on("click",function(){
+    let idx=$(this).index();
+    $(".text").removeClass('active');
+    $(".text").eq(idx).addClass('active');
+})
+的js
+然後text的class要改為text active
+
+
+
+front/login
+1.建立會員登入頁面
+
+
+
+
+
+
