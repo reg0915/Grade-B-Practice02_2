@@ -71,8 +71,8 @@ $sql=" INSERT INTO $this->table (`{$keys}`) values('{$values}')";
 public function del($array)
 {
 
-    $sql=" DELETE * FROM $this->table ";
-    if(!empty($array) && is_array($array)){
+    $sql=" DELETE  FROM $this->table ";
+    if(is_array($array)){
         $tmp=$this->a2s($array);
         $sql .=" where ".join(" && ",$tmp); 
     }else{
@@ -162,6 +162,7 @@ header("location:" . $url);
 
 $Total=new DB ('total');
 $User=new DB ('users');
+$New=new DB ('news');
 
 if(!isset($_SESSION['total'])){
 $today=date("Y-m-d");

@@ -25,6 +25,7 @@
         <?php echo date(" m 月 d 號 l "); ?>| 今日瀏覽:<?php echo $Total->find(['date' => date("Y-m-d")])['total']; ?> 
 		| 累積瀏覽: <?php echo qCol(" SELECT sum(total) from total "); ?> 
 		<a href="index.php" style="float:right">回首頁</a>
+        </div>
         <div id="title2">
 			<a href="index.php" title="健康促進網-首頁">
 
@@ -33,9 +34,9 @@
         </div>
         <div id="mm">
             <div class="hal" id="lef">
+                <a class="blo" href="?do=acc">帳號管理</a>
                 <a class="blo" href="?do=po">分類網誌</a>
-                <a class="blo" href="?do=news">最新文章</a>
-                <a class="blo" href="?do=pop">人氣文章管理</a>
+                <a class="blo" href="?do=news">最新文章管理</a>
                 <a class="blo" href="?do=know">講座管理</a>
                 <a class="blo" href="?do=que">問卷管理</a>
             </div>

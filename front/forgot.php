@@ -22,3 +22,20 @@
 
 
 </fieldset>
+
+<script>
+
+function forgot(){
+let email=$("#email").val()
+$.get("./api/chk_email.php",{email},(res)=>{
+    $("#result").html(res)
+})
+
+}
+
+
+
+
+
+
+</script>

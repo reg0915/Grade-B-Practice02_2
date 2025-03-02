@@ -1,7 +1,33 @@
-<fieldset style="width:50%;margin:auto;">
-    <legend>
-        會員註冊
-    </legend>
+<fieldset style="width:75%;margin:auto;">
+    <legend>帳號管理</legend>
+    <table class="ct" style="width:75%;margin:auto;">
+        <tr >
+            <td>帳號</td>
+            <td>密碼</td>
+            <td>刪除</td>
+        </tr>
+        <?php
+        $rows=$User->all();
+        foreach( $rows as $row):
+            ?>
+        <tr>
+            <td><?=$row['acc'];?></td>
+            <td><?=str_repeat('*',strlen($row['pw']));?></td>
+            <td><input type="checkbox" name="del[]" value="<?=$row['id'];?>"></td>
+        </tr>
+        <?php
+     endforeach
+     ?>
+     </table>
+
+<div class="ct">
+    <button onclick='del()'>確定刪除</button>
+    <button onclick='resetChk()'>清空選取</button>
+
+</div>
+<h2>新增會員</h2>
+
+  
 
 <table>
     <p style="color:red">請設定您要註冊的帳號及密碼（最常12個字元）</p>
@@ -32,9 +58,26 @@
 
 
 
-</fieldset>
-
 <script>
+function del(){
+    let dels=$("input[name='del[]']:checked");
+    let ids=[];
+    dels.each((idx,item)=>{
+        ids.push($(item).val())
+    })
+    console.log(ids)
+    $.post('./api/del_user.php',{ids},()=>{
+        // location.reload();
+    })
+}
+
+
+
+
+
+
+
+
 function reg()
 {
 
@@ -55,14 +98,14 @@ if(user.acc== "" || user.pw== "" || user.pw2== "" || user.email== "" ){
             alert("帳號重複");
         }else{
             $.post("./api/reg.php",user,(res)=>{
-                if(parseInt(res)==1)
-                alert("註冊完成，歡迎加入");
+             location.reload();
             })
         }
     })
 }
-
 }
+
+
 function resetForm(){
 $("#acc").val("")
 $("#pw").val("")
@@ -76,7 +119,10 @@ $("#email").val("")
 
 
 
+function resetChk(){
+$("#acc").val("")
 
+}
 
 
 
@@ -86,3 +132,5 @@ $("#email").val("")
 
 
 </script>
+
+</fieldset>
