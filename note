@@ -129,8 +129,88 @@ unset($_POST['pw2']);
 echo $User->save($_POST);
 
 ?>
-
 完成會員登入及ajax
+
+
+
+
+
+
+
+login
+在這裡建立
+<script>
+
+    function login(){
+ let user = {
+
+    $("#acc").val(),
+    $("#pw").val()
+
+ }  
+
+$.get("./api/chk_acc.php",{acc: user.acc},(res)=>{
+        if(parseInt(res)==0){
+            alert("查無帳號");
+        }else{
+            $.post("./api/reg.php",user,(res)=>{
+                if(parseInt(res)==1){
+                    if(user.acc=='admin'){
+                        location.herf="admin.php";
+                    }else{
+                        location.href='index.php';
+                    }
+                }else{
+                    alert('密碼錯誤');
+                    resetFrom();
+                }
+                
+            })
+        }
+    })
+}
+
+
+function resetForm(){
+$("#acc").val("")
+$("#pw").val("")
+}
+然後再api建立
+chk_pw.php
+<?php include_once "db.php";
+
+$chk=$User->count($_POST);
+if($chk){
+    echo $chk;
+    $_SESSION['user']=$_POST['acc'];
+}else{
+    echo 0 ;
+}
+
+?>
+
+
+Index
+
+1.新增會員登出，歡迎
+     <span style="width:23%; display:inline-block;">
+		<?php if(!isset($_SESSION['user'])): ?>
+		<a href="index.php?do=login">會員登入</a>
+		<?php else: ?>
+		歡迎,<?php echo $_SESSION['user']; ?>
+        <?php if ($_SESSION['user'] == 'admin'): ?>
+		<br><button onclick="location.href='admin.php'">管理</button>｜
+        <?php endif; ?>
+        <button onclick="logout()">登出</button>
+		<?php endif; ?>
+     </span>
+
+
+2.到js寫function logout()
+再去api建立logout.php 
+
+
+
 
 
 

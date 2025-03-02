@@ -63,7 +63,7 @@ if(user.acc== "" || user.pw== "" || user.pw2== "" || user.email== "" ){
 }
 
 
-function restForm(){
+function resetForm(){
 $("#acc").val("")
 $("#pw").val("")
 $("#pw2").val("")
